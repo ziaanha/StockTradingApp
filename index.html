@@ -1,0 +1,190 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZÉA Trade | Paper Trading</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#">
+      <span class="brand-icon">Z</span>
+      <span>ZÉA <b>TRADE</b></span>
+    </a>
+
+    <p class="nav-label">WORKSPACE</p>
+    <button type="button" class="nav-item active" data-view="dashboard">▦ <span>Dashboard</span></button>
+    <button type="button" class="nav-item" data-view="markets">↗ <span>Markets</span></button>
+    <button type="button" class="nav-item" data-view="portfolio">▤ <span>Portfolio</span></button>
+    <button type="button" class="nav-item" data-view="orders">↔ <span>Order History</span></button>
+
+    <div class="sidebar-bottom">
+      <div class="demo-badge"><span></span> PAPER TRADING MODE</div>
+      <p>Virtual money only.<br>No real trades are placed.</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">MARKET SIMULATOR / INDIA</p>
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <span class="market-status"><span></span> SIMULATION ACTIVE</span>
+        <button type="button" id="theme-toggle" class="icon-button" title="Toggle theme">☼</button>
+        <div class="avatar">Z</div>
+      </div>
+    </header>
+
+    <section class="market-strip">
+      <div><span class="strip-label">NIFTY 50</span><strong>24,850.25</strong><small class="positive">+0.72%</small></div>
+      <div><span class="strip-label">SENSEX</span><strong>81,450.60</strong><small class="positive">+0.54%</small></div>
+      <div><span class="strip-label">BANK NIFTY</span><strong>56,120.40</strong><small class="negative">−0.18%</small></div>
+      <div class="strip-note">ILLUSTRATIVE MARKET DATA</div>
+    </section>
+
+    <section class="metrics">
+      <article class="metric-card">
+        <span class="metric-label">TOTAL PORTFOLIO VALUE</span>
+        <h2 id="portfolio-value">₹1,00,000.00</h2>
+        <span class="metric-foot">Cash + holdings</span>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">AVAILABLE CASH</span>
+        <h2 id="cash-value">₹1,00,000.00</h2>
+        <span class="metric-foot">Ready to invest</span>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">TOTAL P&amp;L</span>
+        <h2 id="total-pnl">₹0.00</h2>
+        <span class="metric-foot">Unrealised + realised</span>
+      </article>
+      <article class="metric-card">
+        <span class="metric-label">OPEN POSITIONS</span>
+        <h2 id="positions-count">0</h2>
+        <span class="metric-foot">Stocks held</span>
+      </article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel chart-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">STOCK OVERVIEW</p>
+            <h2 id="chart-stock-name">Reliance Industries</h2>
+            <p class="symbol" id="chart-symbol">RELIANCE · NSE</p>
+          </div>
+          <div class="chart-price">
+            <h2 id="chart-price">₹1,450.00</h2>
+            <span id="chart-change" class="positive">+1.24%</span>
+          </div>
+        </div>
+        <div class="chart-tabs">
+          <button type="button" class="period active" data-period="1D">1D</button>
+          <button type="button" class="period" data-period="1W">1W</button>
+          <button type="button" class="period" data-period="1M">1M</button>
+          <button type="button" class="period" data-period="1Y">1Y</button>
+        </div>
+        <div class="chart-container">
+          <svg id="price-chart" viewBox="0 0 700 230" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="chart-foot"><span>SIMULATED PRICE HISTORY</span><span>INR · ₹</span></div>
+      </article>
+
+      <article class="panel order-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">TRADE TERMINAL</p><h2>Place an order</h2></div>
+          <span class="paper-tag">PAPER</span>
+        </div>
+        <label for="stock-select">Select stock</label>
+        <select id="stock-select"></select>
+        <div class="quote-box">
+          <span>SIMULATED PRICE</span>
+          <strong id="ticket-price">₹1,450.00</strong>
+        </div>
+        <label for="quantity">Quantity (shares)</label>
+        <input type="number" id="quantity" min="1" step="1" value="1">
+        <div class="order-summary">
+          <span>Estimated order value</span>
+          <strong id="order-total">₹1,450.00</strong>
+        </div>
+        <div class="trade-buttons">
+          <button type="button" id="buy-button" class="buy-button">Buy</button>
+          <button type="button" id="sell-button" class="sell-button">Sell</button>
+        </div>
+        <p class="order-note">Orders are simulated. No real money is involved.</p>
+      </article>
+    </section>
+
+    <section class="panel stocks-panel" id="markets-section" hidden>
+      <div class="panel-heading">
+        <div><p class="eyebrow">NSE / BSE INSPIRED</p><h2>Market watch</h2></div>
+        <input id="stock-search" class="search-input" type="search" placeholder="Search stocks...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>STOCK</th><th>PRICE</th><th>CHANGE</th><th>MARKET</th><th>ACTION</th></tr></thead>
+          <tbody id="stocks-body"></tbody>
+        </table>
+      </div>
+      <p class="table-note">Prices are fictional demonstration data, not live market quotes.</p>
+    </section>
+
+    <section class="panel portfolio-panel" id="portfolio-section" hidden>
+      <div class="panel-heading">
+        <div><p class="eyebrow">YOUR INVESTMENTS</p><h2>My holdings</h2></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>STOCK</th><th>QTY</th><th>AVG. PRICE</th><th>CURRENT VALUE</th><th>P&amp;L</th><th>ACTION</th></tr></thead>
+          <tbody id="holdings-body"></tbody>
+        </table>
+      </div>
+      <p id="empty-holdings" class="empty-state">No holdings yet. Buy a stock to get started.</p>
+    </section>
+
+    <section class="panel orders-panel" id="orders-section" hidden>
+      <div class="panel-heading">
+        <div><p class="eyebrow">ACTIVITY</p><h2>Recent orders</h2></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>TIME</th><th>STOCK</th><th>TYPE</th><th>QTY</th><th>PRICE</th><th>STATUS</th></tr></thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+      </div>
+      <p id="empty-orders" class="empty-state">Your simulated orders will appear here.</p>
+    </section>
+
+    <footer>
+      <span>ZÉA TRADE © 2026</span>
+      <span>DEMO ENVIRONMENT · VIRTUAL FUNDS ONLY</span>
+      <button type="button" id="add-funds">+ Add virtual funds</button>
+      <button type="button" id="reset-account">Reset account</button>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <dialog id="funds-dialog">
+    <form method="dialog" id="funds-form">
+      <h2>Add virtual funds</h2>
+      <p>This adds simulated cash to your practice account.</p>
+      <label for="fund-amount">Amount (₹)</label>
+      <input id="fund-amount" type="number" min="1" max="10000000" value="10000" required>
+      <div class="dialog-actions">
+        <button type="button" class="cancel-button" id="cancel-funds">Cancel</button>
+        <button id="confirm-funds" class="buy-button" value="default">Add funds</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
